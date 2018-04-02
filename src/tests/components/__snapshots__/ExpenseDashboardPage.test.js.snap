@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render the Expense dashboard page 1`] = `
-<div>
+<div
+  className="container"
+>
   Dashboard page content...
 </div>
 `;
