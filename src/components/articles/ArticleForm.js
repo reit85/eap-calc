@@ -80,7 +80,7 @@ export default class ArticleForm extends React.Component {
         descriptionDe: this.state.descriptionDe,
         descriptionEn: this.state.descriptionEn,
         manufacturer: this.state.manufacturer,
-        price: this.newPrice(), // this.state.price,
+        price: parseFloat(this.state.price.replace(',', '.')) * 100,
         priceType: this.state.priceType,
         createdAt: this.state.createdAt.valueOf(),
         createdBy: this.state.createdBy,
@@ -89,14 +89,6 @@ export default class ArticleForm extends React.Component {
       });
     }
     // console.log(this.props);
-  }
-
-  newPrice() {
-    let value = this.state.price.replace(',', '.');
-    console.log(value);
-    value = parseFloat(value) * 100;
-    console.log(value);
-    return value;
   }
 
   render() {
