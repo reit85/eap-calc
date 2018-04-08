@@ -22,9 +22,9 @@
   flex-direction: column;
   padding: $s-size;
   text-decoration: none;
-  transition: background .3s ease;
+  transition: background .1s ease;
   &:hover {
-    background: $off-grey;
+    background: darken($off-grey, 1%);
   }
   @media (min-width: $desktop-breakpoint) {
     align-items: center;
@@ -44,12 +44,28 @@
   }
 }
 
-.lst-item__title {
-  margin-bottom: 0;
+.list-item__title {
+  font-size: 1.4em;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1;
   word-break: break-all;
 }
 
-.lst-item__sub-title {
+.list-item__title-en {
+  color: #999;
+  font-size: 1em;
+  font-weight: 400;
+  margin: 0 0 $s-size 0;
+  line-height: 1.1;
+  word-break: break-all;
+}
+
+.list-item__sub-title {
+  color: $grey;
+  font-size: $font-size-small;
+}
+.list-item__sub-title-en {
   color: $grey;
   font-size: $font-size-small;
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import moment from 'moment';
-import {username} from '../../firebase/user'
+import { username } from '../../firebase/user';
 
 export default class ArticleForm extends React.Component {
-  constructor(props){
-    super(props)
-    console.log(username)
+  constructor(props) {
+    super(props);
+    console.log(username);
 
     this.state = {
       nameDe: props.article ? props.article.nameDe : '',
@@ -13,64 +13,65 @@ export default class ArticleForm extends React.Component {
       descriptionDe: props.article ? props.article.descriptionDe : '',
       descriptionEn: props.article ? props.article.descriptionEn : '',
       manufacturer: props.article ? props.article.manufacturer : '',
-      price: props.article ? (props.article.price / 100).toString() : '',
+      price: props.article ? (props.article.price / 100).toString().replace('.', ',') : '',
       priceType: props.article ? props.article.priceType : '',
       createdAt: props.article ? props.article.createdAt : moment(),
       createdBy: props.article ? props.article.createdBy : username,
       editedAt: props.article ? props.article.editedAt : moment(),
       editedBy: props.article ? props.article.editedBy : username,
       action: props.article ? 'edit' : 'add',
-      error: ''
-    }
+      error: '',
+    };
   }
 
   onNameDeChange = (e) => {
-    const nameDe = e.target.value
-    this.setState(() => ({nameDe}))
+    const nameDe = e.target.value;
+    this.setState(() => ({ nameDe }));
   }
 
   onNameEnChange = (e) => {
-    const nameEn = e.target.value
-    this.setState(() => ({nameEn}))
+    const nameEn = e.target.value;
+    this.setState(() => ({ nameEn }));
   }
 
   onDescriptionDeChange = (e) => {
-    const descriptionDe = e.target.value
-    this.setState(() => ({descriptionDe}))
+    const descriptionDe = e.target.value;
+    this.setState(() => ({ descriptionDe }));
   }
 
   onDescriptionEnChange = (e) => {
-    const descriptionEn = e.target.value
-    this.setState(() => ({descriptionEn}))
+    const descriptionEn = e.target.value;
+    this.setState(() => ({ descriptionEn }));
   }
 
   onManufacturerChange = (e) => {
-    const manufacturer = e.target.value
-    this.setState(() => ({manufacturer}))
+    const manufacturer = e.target.value;
+    this.setState(() => ({ manufacturer }));
   }
 
   onPriceChange = (e) => {
-    const price = e.target.value
-    if (!price || price.match(/^\d{1,}(\.\d{0,2})?$/)) {
-      this.setState(() => ({price}))
+    const price = e.target.value;
+    if (!price || price.match(/^\d{1,}(\,\d{0,2})?$/)) {
+      this.setState(() => ({ price }));
+      console.log(price);
     }
   }
 
   onPriceTypeChange = (e) => {
-    const priceType = e.target.value
-    this.setState(() => ({priceType}))
+    const priceType = e.target.value;
+    this.setState(() => ({ priceType }));
   }
 
   onSubmit = (e) => {
-    e.preventDefault()    
-    if(!this.state.nameDe || 
+    e.preventDefault();
+    if (!this.state.nameDe ||
        !this.state.nameEn ||
-       !this.state.descriptionDe || 
+       !this.state.descriptionDe ||
        !this.state.descriptionEn ||
-       !this.state.manufacturer || 
-       !this.state.price || 
+       !this.state.manufacturer ||
+       !this.state.price ||
        !this.state.priceType) {
-        this.setState(() => ({ error: 'Bitte alle Felder ausfüllen.'}))
+      this.setState(() => ({ error: 'Bitte alle Felder ausfüllen.' }));
     } else {
       this.setState(() => ({ error: '' }));
       this.props.onSubmit({
@@ -79,29 +80,40 @@ export default class ArticleForm extends React.Component {
         descriptionDe: this.state.descriptionDe,
         descriptionEn: this.state.descriptionEn,
         manufacturer: this.state.manufacturer,
-        price: parseFloat(this.state.price, 10) * 100,
+        price: this.newPrice(), // this.state.price,
         priceType: this.state.priceType,
         createdAt: this.state.createdAt.valueOf(),
         createdBy: this.state.createdBy,
         editedAt: moment().valueOf(),
-        editedBy: username
+        editedBy: username,
       });
     }
-  } 
+    // console.log(this.props);
+  }
 
-  render(){
-    return(
+  newPrice() {
+    let value = this.state.price.replace(',', '.');
+    console.log(value);
+    value = parseFloat(value) * 100;
+    console.log(value);
+    return value;
+  }
+
+  render() {
+    return (
       <div>
         <form className="form" onSubmit={this.onSubmit}>
           {this.state.action === 'edit' &&
             <p className="form__message">{
               `Artikel erstellt am ${moment(this.state.createdAt).format('DD.MM.YYYY')} von ${this.state.createdBy}.`
-            }</p>
+            }
+            </p>
           }
           {this.state.action === 'edit' &&
             <p className="form__message">{
               `Artikel zuletzt bearbeitet am ${moment(this.state.editedAt).format('DD.MM.YYYY')} von ${this.state.editedBy}.`
-            }</p>
+            }
+            </p>
           }
           <input
             type="text"
@@ -123,19 +135,17 @@ export default class ArticleForm extends React.Component {
             className="textarea"
             value={this.state.descriptionDe}
             onChange={this.onDescriptionDeChange}
-          >
-          </textarea>
+          />
           <textarea
             placeholder="Englische beschreibung (optional) ..."
             className="textarea"
             value={this.state.descriptionEn}
             onChange={this.onDescriptionEnChange}
-          >
-          </textarea>
-          <select 
-            className="dropdown" 
-            //TODO: Herstellernamen mit ID abfragen und Liste füllem mit MAP funktion
-            value={this.state.manufacturer} 
+          />
+          <select
+            className="dropdown"
+            // TODO: Herstellernamen mit ID abfragen und Liste füllem mit MAP funktion
+            value={this.state.manufacturer}
             onChange={this.onManufacturerChange}
           >
             <option value="Siemens">Siemens</option>
@@ -148,9 +158,9 @@ export default class ArticleForm extends React.Component {
             value={this.state.price}
             onChange={this.onPriceChange}
           />
-          <select 
-            className="dropdown" 
-            value={this.state.priceType} 
+          <select
+            className="dropdown"
+            value={this.state.priceType}
             onChange={this.onPriceTypeChange}
           >
             <option value="Verhandelt">Verhandelt</option>
@@ -158,11 +168,11 @@ export default class ArticleForm extends React.Component {
             <option value="Kundenspezifisch">Kundenspezifisch</option>
           </select>
           <div>
-              <button className="button">Artikel speichern</button>
+            <button className="button">Artikel speichern</button>
           </div>
           {this.state.error && <p className="form__error">{this.state.error}</p>}
         </form>
       </div>
-    )
+    );
   }
 }

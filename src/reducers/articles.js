@@ -16,9 +16,8 @@ export default (state = articlesReducerDefaultState, action) => {
             ...article,
             ...action.updates
           };
-        } else {
-          return article;
-        };
+        }
+        return article;
       });
     case 'SET_ARTICLES':
       return action.articles;

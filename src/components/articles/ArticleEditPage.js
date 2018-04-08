@@ -23,28 +23,29 @@ export class ArticleEditPage extends React.Component {
           </div>
         </div>
         <div className="container">
-          <ArticleForm 
-            article={this.props.article} 
+          <ArticleForm
+            article={this.props.article}
             onSubmit={this.onSubmit}
           />
-          <button 
-            className="button button--secondary" 
-            onClick={this.onRemove}>
+          <button
+            className="button button--secondary"
+            onClick={this.onRemove}
+          >
             Löschen
           </button>
         </div>
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = (state, props) => ({
-  article: state.articles.find((article) => article.id === props.match.params.id)
-})
+  article: state.articles.find(article => article.id === props.match.params.id)
+});
 
-const mapDispatchToProps = (dispatch, props) => ({
+const mapDispatchToProps = dispatch => ({
   startEditArticle: (id, article) => dispatch(startEditArticle(id, article)),
-  startRemoveArticle: (data) => dispatch(startRemoveArticle(data))
-})
+  startRemoveArticle: data => dispatch(startRemoveArticle(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleEditPage);

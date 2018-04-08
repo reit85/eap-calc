@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ArticleListItem from './ArticleListItem';
 import selectArticles from '../../selectors/articles';
 
-export const ArticleList = (props) => (
+export const ArticleList = props => (
   <div className="container">
     <div className="list-header">
       <div className="show-for-mobile">Artikel</div>
@@ -11,7 +11,7 @@ export const ArticleList = (props) => (
       <div className="show-for-desktop">Preis</div>
     </div>
     <div className="list-body">
-      { 
+      {
         props.articles.length === 0 ? (
           <div className="list-item list-item--message">
             <span> Keine Artikel vorhanden.</span>
