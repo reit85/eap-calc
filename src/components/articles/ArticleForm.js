@@ -5,7 +5,6 @@ import { username } from '../../firebase/user';
 export default class ArticleForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(username);
 
     this.state = {
       nameDe: props.article ? props.article.nameDe : '',
@@ -20,7 +19,7 @@ export default class ArticleForm extends React.Component {
       editedAt: props.article ? props.article.editedAt : moment(),
       editedBy: props.article ? props.article.editedBy : username,
       action: props.article ? 'edit' : 'add',
-      error: '',
+      error: ''
     };
   }
 
@@ -64,6 +63,8 @@ export default class ArticleForm extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+
+    const user = username;
     if (!this.state.nameDe ||
        !this.state.nameEn ||
        !this.state.descriptionDe ||

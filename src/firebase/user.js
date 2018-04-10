@@ -1,6 +1,8 @@
 import * as firebase from 'firebase';
 
-export const username = firebase.auth().onAuthStateChanged((user) => {
-  return user.displayName;
+// FIXME: Bad JavaScript, but it works! Someone have a better idea?
+export let username = firebase.auth().onAuthStateChanged((user) => {
+  username = user.displayName;
+  return username;
 });
 
