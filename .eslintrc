@@ -18,14 +18,18 @@
   },
   "rules": {
     "comma-dangle": "off",
+    "no-shadow": "off",
     "no-console": "off",
     "no-useless-escape": "off",
+    "no-underscore-dangle": "off",
     "linebreak-style": "off",
     "arrow-body-style": "off",
     "prefer-destructuring": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/no-autofocus": [ 0, { "ignoreNonDOM": true }],
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "import/prefer-default-export": "off",
+    "import/no-named-as-default": "off"
   }
 }

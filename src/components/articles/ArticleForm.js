@@ -88,7 +88,6 @@ export default class ArticleForm extends React.Component {
         editedBy: username,
       });
     }
-    // console.log(this.props);
   }
 
   render() {

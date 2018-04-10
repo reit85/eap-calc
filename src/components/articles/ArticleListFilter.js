@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setTextFilter } from '../../actions/filters';
+import setTextFilter from '../../actions/filters';
 
 export class ArticleListFilters extends React.Component {
   onTextChange = (e) => {

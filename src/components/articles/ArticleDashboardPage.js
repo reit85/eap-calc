@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticleSummary from './ArticleSummary'
+import ArticleSummary from './ArticleSummary';
 import ArticleListFilter from './ArticleListFilter';
 import ArticleList from './ArticleList';
 

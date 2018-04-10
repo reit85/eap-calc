@@ -1,5 +1,6 @@
-export const setTextFilter = (text = '') => ({
+const setTextFilter = (text = '') => ({
   type: 'SET_TEXT_FILTER',
   text
 });
 
+export default setTextFilter;
