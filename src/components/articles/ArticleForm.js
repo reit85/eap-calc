@@ -64,7 +64,6 @@ export default class ArticleForm extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const user = username;
     if (!this.state.nameDe ||
        !this.state.nameEn ||
        !this.state.descriptionDe ||
